@@ -26,7 +26,7 @@ const AuthLayout = () => {
                   <p><a id="no-account" className="text-500 opacity-100 hover-pointer">Continuar sem logar</a> <span className="text-300" style={{fontSize: '.85em',color: 'var(--accent30)'}}>(seu roteiro não será salvo)</span></p>
                </div>
               </section>
-              <img id="sign-side-image" className="w-100 h-screen" src="sign-side-image.png" />
+              <img id="sign-side-image" className="w-100 h-screen" src="images/sign-side-image.png" />
             </div>
           </>
         )}
