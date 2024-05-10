@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { LinearGradient } from 'react-text-gradients'
+import {useTranslation} from "react-i18next";
 
 const NotFound = () => {
+  const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = 'Página não encontrada';
+    document.title = t('404.first');
   }, []);
 
   return (
@@ -23,11 +25,11 @@ const NotFound = () => {
           </p>
           <p className="text-600" style={{
             color: "var(--text)", fontSize: "1.5em", lineHeight: "1em"
-          }}>Página não encontrada
+          }}>{t('404.first')}
           </p>
           <a className='text-500 hover-pointer' href={'/'} style={{
             color: "var(--accent)", marginTop: "1em"
-          }}>Voltar à página inicial</a>
+          }}>{t('404.back')}</a>
         </div>
       </div>
     </>

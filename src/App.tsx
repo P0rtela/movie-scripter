@@ -3,6 +3,9 @@ import './globals.css';
 import RootLayout from './_root/RootLayout';
 import AuthLayout from './_auth/AuthLayout';
 import NotFound from './NotFound'
+import i18next from './i18n'
+
+i18next.t('my.key')
 
 const App = () => {
 
@@ -10,9 +13,7 @@ const App = () => {
         <main>
             <Routes>
                 {/* public routes */}
-                <Route element={<AuthLayout />}>
-                    <Route path="/sign"/>
-                </Route>
+                <Route path="/sign" element={<AuthLayout />}  />
                 {/* private routes */}
                 <Route index element={<RootLayout />} />
                 <Route path='/*' element={<NotFound />} />

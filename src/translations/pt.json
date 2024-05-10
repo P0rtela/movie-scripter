@@ -1,0 +1,19 @@
+{
+    "pt": {
+        "translation": {
+            "app": {
+                "test": "Teste Português"
+            },
+            "404":{
+                "first": "Página não encontrada",
+                "back": "Voltar à página inicial"
+            },
+            "sign":{
+                "enter": "Entre com a sua",
+                "account": "Conta Google",
+                "continue": "Continuar sem entrar",
+                "not-save": "seu roteiro não será salvo"
+            }
+        }
+    }
+}

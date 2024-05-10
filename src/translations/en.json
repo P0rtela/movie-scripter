@@ -1,0 +1,19 @@
+{
+    "en": {
+        "translation": {
+            "app": {
+                "test": "English Test"
+            },
+            "404": {
+                "first": "Page Not Found",
+                "back": "Go back to Home Page"
+            },
+            "sign":{
+                "enter": "Enter with your",
+                "account": "Google Account",
+                "continue": "Continue without enter",
+                "not-save": "your script won't be saved"
+            }
+        }
+    }
+}
