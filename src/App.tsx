@@ -5,6 +5,7 @@ import SignupForm from './_auth/forms/SignupForm';
 import { Home } from './_root/pages/';
 import RootLayout from './_root/RootLayout';
 import AuthLayout from './_auth/AuthLayout';
+import NotFound from './NotFound'
 
 const App = () => {
     return (
@@ -18,6 +19,7 @@ const App = () => {
                 <Route element={<RootLayout />}>
                     <Route index element={<Home />} />
                 </Route>
+                <Route path='/*' element={<NotFound />} />
             </Routes>
         </main>
     )

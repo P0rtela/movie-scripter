@@ -1,6 +1,7 @@
 #auth-layout{
     display: grid;
     grid-template-columns: 13fr 9fr;
+    background: var(--bg2);
 }
 
 #auth-area{

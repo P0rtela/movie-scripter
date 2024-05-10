@@ -1,9 +1,14 @@
 import { Outlet, Navigate } from "react-router-dom"
+import { useEffect } from 'react';
 import './auth.css'
 
 const AuthLayout = () => {
-  const isAuthenticated = false;
 
+  useEffect(() => {
+    document.title = 'logar';
+  }, []);
+
+  const isAuthenticated = false;
   return (
     <>
       {isAuthenticated ?
