@@ -1,0 +1,52 @@
+#auth-layout{
+    display: grid;
+    grid-template-columns: 13fr 9fr;
+}
+
+#auth-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#auth-form{
+    font-size: .9em;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary10);
+    padding: 30px;
+    padding-bottom: 25px;
+    border-radius: 50px;
+    gap: 25px;
+    color: var(--accent);
+}
+
+#google-login-button img{
+    width: 3vw;
+}
+
+#google-login-button{
+    background: #fff;
+    border: solid 3px var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    gap: 15px;
+    line-height: 1em;
+    font-size: 1.6em;
+    padding: 20px 0;
+    border-radius: 20px;
+}
+
+#no-account:hover{
+    text-decoration: underline;
+    color: var(--primary);
+}
+
+hr{
+    border: none;
+    border-bottom: solid 1px var(--accent);
+}
