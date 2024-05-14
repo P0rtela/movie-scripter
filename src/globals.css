@@ -5,6 +5,7 @@
     --text: #fcfaff;
     --bg: #07040b;
     --bg2: #0b0612;
+    --bg3: #0f081a;
     --primary: #9867d0;
     --secondary: #8059c0;
     --accent: #d2b8e5;
@@ -47,6 +48,7 @@
     --primary90: hsl(268, 53%, 61%, 90%);
     --primary95: hsl(268, 53%, 61%, 95%);
     --secondary5: hsl(263, 45%, 55%, 5%);
+    --secondary6: hsl(263, 45%, 55%, 6.5%);
     --secondary10: hsl(263, 45%, 55%, 10%);
     --secondary15: hsl(263, 45%, 55%, 15%);
     --secondary20: hsl(263, 45%, 55%, 20%);
@@ -86,17 +88,38 @@
     --accent95: hsl(275, 46%, 81%, 95%);
 }
 
-* {
+body{
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
     margin: 0;
     padding: 0;
-}
-
-body{
     background: var(--bg);
     color: var(--text);
+    /* filter: saturate(0); */
+}
+
+p {
+    margin: 0;
+}
+/* width */
+::-webkit-scrollbar {
+  width: .8em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--bg); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--secondary30); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary40); 
 }
 
 .no-select{
@@ -208,3 +231,9 @@ body{
 .opacity-100{
     opacity: 1;
 }
+
+.nt-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }

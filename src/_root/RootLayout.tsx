@@ -1,10 +1,17 @@
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { MenuBar, ScriptEditor } from "./components";
+import './components/components.css'
 
 function RootLayout() {
   const { t } = useTranslation();
+  //localStorage.setItem("language", "en")
   return (
     <>
-      <div>RootLayout</div>
+      <div id="main">
+        <MenuBar />
+        <ScriptEditor />
+        <div style={{ backgroundColor: 'var(--primary10)' }}></div>
+      </div>
     </>
   )
 }

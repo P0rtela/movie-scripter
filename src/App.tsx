@@ -8,6 +8,10 @@ import i18next from './i18n'
 i18next.t('my.key')
 
 const App = () => {
+    console.log(localStorage.getItem("language"))
+    if (localStorage.getItem("language") == null) {
+        localStorage.setItem("language", "en")
+    }
 
     return (
         <main>
