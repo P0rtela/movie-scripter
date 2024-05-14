@@ -54,7 +54,6 @@ const ScriptEditor = () => {
         lineButtons[caretLineType]?.classList.add('current-line-type')
       }
     }
-    // TODO reativar o scanner de novo
     // const intervalId = setInterval(() => {
     //   setCheckCaret(checkCaret + 1)
     // }, [25]);
