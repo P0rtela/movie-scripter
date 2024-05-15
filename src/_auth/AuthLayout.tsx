@@ -1,4 +1,4 @@
-import { Outlet, Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { useEffect } from 'react';
 import './auth.css'
 import {useTranslation} from "react-i18next";

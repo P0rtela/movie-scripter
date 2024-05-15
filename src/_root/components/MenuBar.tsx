@@ -1,5 +1,3 @@
-import React from 'react'
-
 const MenuBar = () => {
   return (
     <div style={{backgroundColor: 'var(--primary10)'}}>MenuBar</div>

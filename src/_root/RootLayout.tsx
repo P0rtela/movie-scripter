@@ -1,9 +1,8 @@
-import { useTranslation } from "react-i18next";
 import { MenuBar, ScriptEditor } from "./components";
 import './components/components.css'
 
 function RootLayout() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   //localStorage.setItem("language", "en")
   return (
     <>
