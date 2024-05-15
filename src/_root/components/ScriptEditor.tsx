@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
-// import { Slugline, Action, Character, Parentherical, Dialog, Transition, SubHeaders } from './ScriptTags'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBuilding, faFaceSmile, faComment, faCircleRight, faChartBar } from '@fortawesome/free-regular-svg-icons'
 import { faPersonRunning, faBold, faUnderline } from '@fortawesome/free-solid-svg-icons'
