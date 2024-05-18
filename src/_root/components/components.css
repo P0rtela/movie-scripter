@@ -126,8 +126,12 @@
     background: none;
 }
 
-.script-line-button > *{
-    transform: scale(1.2);
+.editor-button{
+    filter: invert(48%) sepia(79%) hue-rotate(235deg) brightness(.55);
+}
+
+.current-line-type .editor-button{
+    filter: invert(48%) sepia(79%) hue-rotate(235deg) brightness(.95);
 }
 
 .script-tag-change, .script-text-change{

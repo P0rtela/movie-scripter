@@ -1,7 +1,4 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBuilding, faFaceSmile, faComment, faCircleRight, faChartBar } from '@fortawesome/free-regular-svg-icons'
-import { faPersonRunning, faBold, faUnderline } from '@fortawesome/free-solid-svg-icons'
 
 const ScriptEditor = () => {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -108,17 +105,17 @@ const ScriptEditor = () => {
         <div className='script-context-menu'>
           <div className='script-change' ref={scriptChangeRef}>
             <div className='script-text-change'>
-              <button className='script-line-button script-text-change nt-select hover-pointer' id='text-bold'><FontAwesomeIcon icon={faBold} /></button>
-              <button className='script-line-button script-text-change nt-select hover-pointer' id='text-underline'><FontAwesomeIcon icon={faUnderline} /></button>
+              <button className='script-line-button script-text-change nt-select hover-pointer' id='text-bold'>     <img style={{transform: "scale(.75)"}} className="editor-button" src='editor-buttons/bold.svg' /></button>
+              <button className='script-line-button script-text-change nt-select hover-pointer' id='text-underline'><img style={{transform: "scale(.9)"}} className="editor-button" src='editor-buttons/underline.svg' /></button>
             </div>
             <div className='script-tag-change'>
-              <button onClick={() => editLineType('slugline')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-slugline'><FontAwesomeIcon icon={faBuilding} /></button>
-              <button onClick={() => editLineType('action')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-action'><FontAwesomeIcon icon={faPersonRunning} /></button>
-              <button onClick={() => editLineType('character')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-character' ><FontAwesomeIcon icon={faFaceSmile} /></button>
-              <button onClick={() => editLineType('dialog')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-dialog'><FontAwesomeIcon icon={faComment} /></button>
-              <button onClick={() => editLineType('parentherical')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-parentherical'></button>
-              <button onClick={() => editLineType('transition')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-transition'><FontAwesomeIcon icon={faCircleRight} /></button>
-              <button onClick={() => editLineType('subheaders')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-subheaders'><FontAwesomeIcon icon={faChartBar} /></button>
+              <button onClick={() => editLineType('slugline')} className='script-line-button script-tag-change nt-select hover-pointer ' id='line-slugline'>                    <img style={{transform: "scale(.75)"}} className="editor-button" src="editor-buttons/slugline.svg"/></button>
+              <button onClick={() => editLineType('action')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-action'>                         <img style={{transform: "scale(.9)"}} className="editor-button" src="editor-buttons/action.svg" /></button>
+              <button onClick={() => editLineType('character')} className='script-line-button script-tag-change nt-select hover-pointer current-line-type' id='line-character' ><img style={{transform: "scale(1)"}} className="editor-button" src="editor-buttons/character.svg" /></button>
+              <button onClick={() => editLineType('dialog')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-dialog'>                         <img style={{transform: "scale(1)"}} className="editor-button" src="editor-buttons/dialog.svg" /></button>
+              <button onClick={() => editLineType('parentherical')} className='script-line-button script-tag-change nt-select hover-pointer text-center' id='line-parentherical'><span style={{fontFamily: "Courier Prime", fontWeight: 700, transform: "scale(1.35)",top: ".025em", position: "relative"}}>()</span></button>
+              <button onClick={() => editLineType('transition')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-transition'>                 <img style={{transform: "scale(1)"}} className="editor-button" src="editor-buttons/transition.svg" /></button>
+              <button onClick={() => editLineType('subheaders')} className='script-line-button script-tag-change nt-select hover-pointer' id='line-subheaders'>                 <img style={{transform: "scale(1)"}} className="editor-button" src="editor-buttons/subheader.svg" /></button>
             </div>
           </div>
         </div>
@@ -134,11 +131,32 @@ const ScriptEditor = () => {
           <div className='parentherical'>(sério e ríspido)</div>
           <div className='dialog'>A torneira... Você fechou a torneira?</div>
           <div className='transition'>CUT TO:</div>
-          <div className='subheaders'>CUT TO:</div>
+          <div className='subheaders'>SUBLINHA</div>
         </div>
       </div>
     </>
   )
 }
+{/*
+TODO
+
+Slugline, transição, headers ficam sempre em maisculo
+
+ENTER:
+- slugline: ação
+- transição e subheaders: slugline
+- personagem e parentherical: dialogo
+- dialogo: ação
+
+TAB:
+- ação: personagem
+- dialogo: parenteses
+
+SHIFT+TAB:
+- qualquer um: ação
+- ação: slugline
+
+
+*/}
 
 export default ScriptEditor
