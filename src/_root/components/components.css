@@ -96,9 +96,11 @@
     background-color: var(--bg2);
     position: sticky;
     top: 0;
+    left: 0;
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 52em 1fr;
+    z-index: 10000;
 }
 
 .script-change{
@@ -275,6 +277,8 @@
     .phone-not-writing{
         display: flex;
         justify-content: space-between;
+        z-index: 10000;
+        background-color: var(--bg2);
     }
 }
 

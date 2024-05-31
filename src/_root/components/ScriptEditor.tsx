@@ -163,14 +163,98 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
       newDiv.classList.add("slugline-number");
       parent.appendChild(newDiv);
       newDiv.style.top = `${(e as HTMLElement).offsetTop}px`
-      newDiv.style.left = `${
-        (e as HTMLElement).offsetLeft - (document.querySelectorAll('.script-editor-container')[0] as HTMLElement).offsetLeft
-      }px`
+      newDiv.style.left = `${(e as HTMLElement).offsetLeft - (document.querySelectorAll('.script-editor-container')[0] as HTMLElement).offsetLeft
+        }px`
       // console.log((e as HTMLElement).offsetTop)
       // console.log((e as HTMLElement).offsetLeft)
-      console.log(newDiv.offsetWidth)
     })
   }
+
+  const KeyUP = (e: { target(target: any): unknown; ctrlKey: boolean; key: string; preventDefault: () => void; shiftKey: boolean; }) => {
+
+    let element = window.getSelection()?.getRangeAt(0)?.startContainer.parentElement;
+    const classs = (element?.classList[0]);
+    const pa = e.target as unknown as HTMLElement
+    let fore = null
+    let next = null
+
+    for (let i = 0; i < pa.childNodes.length; i++) {
+      if (pa.childNodes[i] == element && pa.childNodes[i - 1]) {
+        fore = (pa.childNodes[i - 1] as HTMLElement).classList[0]
+      }
+      if (pa.childNodes[i] == element && pa.childNodes[i + 1]) {
+        next = (pa.childNodes[i + 1] as HTMLElement).classList[0]
+      }
+    }
+
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      console.log('Tab pressionado');
+      console.log(fore);
+      console.log(classs);
+      console.log(next);
+      if (e.shiftKey) {
+        if (fore !== null) {
+          switch (classs) {
+            case "action":
+              editLineType("slugline");
+              break;
+            case "parentherical":
+              if (fore == "character") {
+                editLineType("dialog");
+              } else {
+                editLineType("action");
+              }
+              break;
+            case "character":
+              if (fore == "character") {
+                if (next == "dialog") {
+                  editLineType("parentherical");
+                } else {
+                  editLineType("dialog");
+                }
+              } else {
+                editLineType("action");
+              }
+              break;
+            default:
+              editLineType("action");
+              break;
+          }
+        }
+      } else {
+        switch (classs) {
+          case "action":
+            editLineType("character");
+            break;
+          case "dialog":
+            if (fore == "character") { 
+              editLineType("parentherical");
+            }
+            break;
+          case "slugline":
+            editLineType("action");
+            break;
+        }
+      }
+    }
+
+    // else if (e.key === 'Enter') {
+    //   console.log('Enter pressionado');
+    // } else if (e.ctrlKey && e.key === 'z') {
+    //   console.log('Crtl+Z pressionado');
+    //   switch (classs) {
+    //     case "character":
+    //       e.preventDefault();
+    //       editLineType("action");
+    //       break;
+    //     case "parentherical":
+    //       e.preventDefault();
+    //       editLineType("dialog");
+    //       break;
+    //   }
+    // }
+  };
 
   return (
     <>
@@ -179,7 +263,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         <div className='script-context-menu phone-not-writing'>{/* phone-is-writing */}
           <div className='editor-type'>
             {isPhone ?
-              <img onClick={() => {openMenu(); updateSLuglineVisualCount()}} style={{ transform: "scale(.75)", width: "2em", marginLeft: "14px" }} className="editor-button" src="editor-buttons/bars.svg" />
+              <img onClick={() => { openMenu(); updateSLuglineVisualCount() }} style={{ transform: "scale(.75)", width: "2em", marginLeft: "14px" }} className="editor-button" src="editor-buttons/bars.svg" />
               :
               <select className='select-editor-type'>
                 <option value="editor">Editor</option>
@@ -205,7 +289,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
             <button id="export-pdf" className='hover-pointer' onClick={() => exportButton()}>Exportar</button>
           </div>
         </div>
-        <div onInput={updateDocument} contentEditable="true" datatype='script' className='script-editor se-min-desktop' ref={editorRef}>
+        <div onKeyDown={KeyUP} onInput={updateDocument} contentEditable="true" datatype='script' className='script-editor se-min-desktop' ref={editorRef}>
           <div className='slugline'>
             INT. CORREDOR
           </div>
@@ -235,14 +319,6 @@ ENTER:
 - transição e subheaders: slugline
 - personagem e parentherical: dialogo
 - dialogo: ação
-
-TAB:
-- ação: personagem
-- dialogo: parenteses
-
-SHIFT+TAB:
-- qualquer um: ação
-- ação: slugline
 
 
 */}
