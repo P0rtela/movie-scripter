@@ -56,6 +56,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         (lineButtons as any)[caretLineType]?.classList.add('current-line-type');
       }
     }
+    // UPDATE 
     // const intervalId = setInterval(() => {
     //   setCheckCaret(checkCaret + 1)
     // }, [25]);
@@ -171,7 +172,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
 
   const KeyUP = async (e: { target(target: any): unknown; ctrlKey: boolean; key: string; preventDefault: () => void; shiftKey: boolean; }) => {
 
-    let element = window.getSelection()?.getRangeAt(0)?.startContainer.parentElement;
+    let element = window.getSelection()?.getRangeAt(0)?.startContainer.parentElement as HTMLInputElement | HTMLTextAreaElement;
     const classs = (element?.classList[0]);
     const pa = e.target as unknown as HTMLElement
     let fore = null
@@ -188,7 +189,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
 
     if (e.key === 'Tab') {
       e.preventDefault();
-      // console.log('Tab pressionado');
+      console.log('Tab pressionado');
       // console.log(fore);
       // console.log(classs);
       // console.log(next);
@@ -227,15 +228,38 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
             editLineType("character");
             if (fore == "character" || fore == "parentherical") {
               editLineType("dialog");
-            } 
+            }
             break;
           case "dialog":
-            if (fore == "character") { 
+            if (fore == "character") {
               editLineType("parentherical");
             }
             break;
           case "slugline":
-            editLineType("action");
+            const autoCompleteInput = element?.innerHTML.toUpperCase()
+            let autoCompleted = false
+            if (autoCompleteInput && element?.innerHTML) {
+              if ("INT. ".includes(autoCompleteInput)) {
+                element.classList.toggle("autoCompleteTarget")
+                document.querySelectorAll('.autoCompleteTarget')[0].innerHTML = "INT.&nbsp;"
+                element.classList.toggle("autoCompleteTarget")
+                autoCompleted = true
+              }
+              if ("EXT. ".includes(autoCompleteInput)) {
+                element.classList.toggle("autoCompleteTarget")
+                document.querySelectorAll('.autoCompleteTarget')[0].innerHTML = "EXT.&nbsp;"
+                element.classList.toggle("autoCompleteTarget")
+                autoCompleted = true
+              }
+              if(element.parentElement && autoCompleted){
+                const childList = Array.from(element.parentElement.childNodes);
+                console.log(childList.indexOf(element))
+                moveCursorRight(pa, childList.indexOf(element))
+              }
+            }
+            if (!autoCompleted) {
+              editLineType("action");
+            }
             break;
         }
       }
@@ -275,6 +299,18 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         newLine.classList.toggle("action")
       }
     }
+  };
+
+  const moveCursorRight = (pa: any, index: any) => {
+    var el = pa
+    var range = document.createRange()
+    var sel = window.getSelection()
+    
+    range.setStart(el.childNodes[index], 1)
+    range.collapse(true)
+    if (sel === null) return
+    sel.removeAllRanges()
+    sel.addRange(range)
   };
 
   const createNextElement = () => {
@@ -341,15 +377,15 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
   );
 }
 {/*
-TODO
-
-Slugline, transição, headers ficam sempre em maisculo
+//TODO
 
 Bugs que não sei corrigir:
 - quando dá enter e troca a formatação da linha, ele troca a da última
 
 Google:
 - quando abrir o projeto, change tem que ser atualizado imediatamente
+
+Info também ser atualizada quando o projeto for exportado
 
 */}
 
