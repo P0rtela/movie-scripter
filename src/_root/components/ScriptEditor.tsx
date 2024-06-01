@@ -141,6 +141,8 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
     }
     change = change.replace(/<br>/g, "");
     change = change.replace(/<BR>/g, "");
+    change = change.replace(/&NBSP/g, " ");
+    change = change.replace(/&nbsp/g, " ");
     // console.log(change);
     updateSLuglineVisualCount()
     return (change);
@@ -170,7 +172,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
     })
   }
 
-  const KeyUP = async (e: { target(target: any): unknown; ctrlKey: boolean; key: string; preventDefault: () => void; shiftKey: boolean; }) => {
+  const KeyUP = async (e: React.KeyboardEvent<HTMLDivElement>) => {
 
     let element = window.getSelection()?.getRangeAt(0)?.startContainer.parentElement as HTMLInputElement | HTMLTextAreaElement;
     const classs = (element?.classList[0]);

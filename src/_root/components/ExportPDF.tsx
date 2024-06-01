@@ -1,7 +1,8 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import { Page, Text, View, Document, StyleSheet, Font, PDFViewer } from '@react-pdf/renderer'
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import fontRegular from "./fonts/CourierPrime-Regular.ttf"
+
+import fontRegular from "./fonts/CourierPrime-Regular.ttf" 
 import fontBold from "./fonts/CourierPrime-Bold.ttf"
 import './export-container.css'
 
@@ -216,7 +217,7 @@ const MakePDF = (props: { text: string | number | boolean | React.ReactElement<a
                         if (line[0] === "&") {
                             slugCount += 1
                         }
-                        return <Text key={index} style={styles[getLineType(line[0])]}>{line[0] === "&" ? slugCount + "  " : ""}{line.slice(1)}</Text>
+                        return <Text key={index} style={styles[getLineType(line[0]) as keyof typeof styles]}>{line[0] === "&" ? slugCount + "  " : ""}{line.slice(1)}</Text>
                     })}
                 </View>
                 <View fixed>
@@ -251,14 +252,6 @@ function getLineType(type: string) {
         type = "subheaders"
     }
     return (type)
-}
-export const ViewPDF = (props: { text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => {
-    let text = props.text?.toString()
-    return (
-        <PDFViewer>
-            <MakePDF text={text} />
-        </PDFViewer>
-    )
 }
 
 export default ExportPDF

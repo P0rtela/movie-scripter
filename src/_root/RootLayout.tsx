@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { ComponentType, useRef, useState } from "react";
 import { MenuBar, ScriptEditor } from "./components";
-import ExportPDF, { ViewPDF } from "./components/ExportPDF";
+import ExportPDF from "./components/ExportPDF";
 import './components/components.css'
 let IsMenuOpen = false
 function MenuOpen() {
@@ -31,11 +31,11 @@ function RootLayout() {
     const ele = document.getElementById("export-overlay")
     ele?.classList.toggle("export-overlay-hide")
     ele?.classList.toggle("export-overlay-show")
-    // console.log(script)
-    exportRef.current.updatePDF(script)
+    console.log(script)
+    exportRef.current?.updatePDF(script)
   }
 
-  const exportRef = useRef<ComponentType | null>(null);
+  const exportRef = useRef<React.RefObject<typeof ExportPDF> | null>(null);
   return (
     <>
       <div id="main" className='openMenu'>
