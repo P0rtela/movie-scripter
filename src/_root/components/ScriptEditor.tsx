@@ -13,11 +13,6 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
     openMenu()
   }, []);
 
-
-  // const editingScritp = (event) => { // roda quando o texto é mudado
-  //   const currentElement = event.target
-  //   console.log("Elemento atual: ", currentElement)
-  // }
   const [checkCaret, setCheckCaret] = useState(0);
   useEffect(() => {
     if (false) { setCheckCaret(0); }
@@ -84,6 +79,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         editorRef.current?.focus();
         kid.classList.add(type);
       } else {
+        // quando está na linha certa
         const classs = (element?.classList[0]);
         editorRef.current?.focus();
         if (classs !== undefined) {
@@ -142,6 +138,8 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         change += (type + line + "\n");
       }
     }
+    change = change.replace(/<br>/g, "");
+    change = change.replace(/<BR>/g, "");
     // console.log(change);
     updateSLuglineVisualCount()
     return (change);
@@ -168,12 +166,10 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
       newDiv.style.top = `${(e as HTMLElement).offsetTop}px`
       newDiv.style.left = `${(e as HTMLElement).offsetLeft - (document.querySelectorAll('.script-editor-container')[0] as HTMLElement).offsetLeft
         }px`
-      // console.log((e as HTMLElement).offsetTop)
-      // console.log((e as HTMLElement).offsetLeft)
     })
   }
 
-  const KeyUP = (e: { target(target: any): unknown; ctrlKey: boolean; key: string; preventDefault: () => void; shiftKey: boolean; }) => {
+  const KeyUP = async (e: { target(target: any): unknown; ctrlKey: boolean; key: string; preventDefault: () => void; shiftKey: boolean; }) => {
 
     let element = window.getSelection()?.getRangeAt(0)?.startContainer.parentElement;
     const classs = (element?.classList[0]);
@@ -245,21 +241,50 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
       }
     }
 
-    // else if (e.key === 'Enter') {
-    //   console.log('Enter pressionado');
-    // } else if (e.ctrlKey && e.key === 'z') {
-    //   console.log('Crtl+Z pressionado');
-    //   switch (classs) {
-    //     case "character":
-    //       e.preventDefault();
-    //       editLineType("action");
-    //       break;
-    //     case "parentherical":
-    //       e.preventDefault();
-    //       editLineType("dialog");
-    //       break;
-    //   }
-    // }
+    if (e.key === 'Enter') {
+      console.log('Enter pressionado');
+      // const newLine = editorRef.current.value.substring(editorRef.current.selectionStart);
+      const newLine = await createNextElement() as HTMLElement;
+      console.log(classs);
+      const newClasss = (newLine.classList[0]);
+      if (newClasss == "slugline") {
+        newLine.classList.toggle("slugline")
+        updateSLuglineVisualCount()
+        newLine.classList.toggle("action")
+      }
+      if (newClasss == "trasition") {
+        newLine.classList.toggle("trasition")
+        newLine.classList.toggle("slugline")
+        updateSLuglineVisualCount()
+      }
+      if (newClasss == "subheaders") {
+        newLine.classList.toggle("subheaders")
+        newLine.classList.toggle("slugline")
+        updateSLuglineVisualCount()
+      }
+      if (newClasss == "parentherical") {
+        newLine.classList.toggle("parentherical")
+        newLine.classList.toggle("dialog")
+      }
+      if (newClasss == "character") {
+        newLine.classList.toggle("character")
+        newLine.classList.toggle("dialog")
+      }
+      if (newClasss == "dialog") {
+        newLine.classList.toggle("dialog")
+        newLine.classList.toggle("action")
+      }
+    }
+  };
+
+  const createNextElement = () => {
+    let element = window.getSelection()?.getRangeAt(0)?.startContainer.parentElement;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const newLine = element?.nextElementSibling;
+        resolve(newLine as HTMLElement);
+      }, 1); // Aguarda 1 segundo antes de resolver a promessa
+    });
   };
 
   return (
@@ -320,14 +345,8 @@ TODO
 
 Slugline, transição, headers ficam sempre em maisculo
 
-Corrigir;
+Bugs que não sei corrigir:
 - quando dá enter e troca a formatação da linha, ele troca a da última
-
-ENTER:
-- slugline: ação
-- transição e subheaders: slugline
-- personagem e parentherical: dialogo
-- dialogo: ação
 
 Google:
 - quando abrir o projeto, change tem que ser atualizado imediatamente
