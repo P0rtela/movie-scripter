@@ -27,11 +27,12 @@ function RootLayout() {
   }
 
 
-  const ShowExport = () => {
+  const ShowExport = (script: string) => {
     const ele = document.getElementById("export-overlay")
     ele?.classList.toggle("export-overlay-hide")
     ele?.classList.toggle("export-overlay-show")
-    exportRef.current.updatePDF()
+    // console.log(script)
+    exportRef.current.updatePDF(script)
   }
 
   const exportRef = useRef<ComponentType | null>(null);
@@ -39,7 +40,7 @@ function RootLayout() {
     <>
       <div id="main" className='openMenu'>
         <MenuBar openMenu={MenuOpen} />
-        <ScriptEditor openMenu={MenuOpen} exportButton={ShowExport} />
+        <ScriptEditor openMenu={MenuOpen} exportButton={(script: string) => ShowExport(script)} />
         <div style={{ backgroundColor: 'var(--primary10)' }}></div>
         {/* <ViewPDF text={texto}></ViewPDF> */}
       </div>

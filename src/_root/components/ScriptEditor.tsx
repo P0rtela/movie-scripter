@@ -1,7 +1,7 @@
 import { FormEvent, createElement, useEffect, useRef, useState } from 'react'
 
 // { openMenu }: { openMenu: () => void }, { exportButton }: { exportButton: () => void }
-function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, exportButton: () => void }) {
+function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, exportButton: (script: string) => void }) {
   const editorRef = useRef<HTMLDivElement>(null);
   const scriptChangeRef = useRef(null);
   let change = "";
@@ -110,6 +110,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         let line = "";
         if (element.classList.contains("slugline")) { //&
           line = (element.innerHTML);
+          line = line.toUpperCase();
           type = "&";
         }
         if (element.classList.contains("action")) { //!
@@ -130,10 +131,12 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         }
         if (element.classList.contains("transition")) { //$
           line = (element.innerHTML);
+          line = line.toUpperCase();
           type = "$";
         }
         if (element.classList.contains("subheaders")) { //*
           line = (element.innerHTML);
+          line = line.toUpperCase();
           type = "*";
         }
         change += (type + line + "\n");
@@ -189,10 +192,10 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
 
     if (e.key === 'Tab') {
       e.preventDefault();
-      console.log('Tab pressionado');
-      console.log(fore);
-      console.log(classs);
-      console.log(next);
+      // console.log('Tab pressionado');
+      // console.log(fore);
+      // console.log(classs);
+      // console.log(next);
       if (e.shiftKey) {
         if (fore !== null) {
           switch (classs) {
@@ -226,6 +229,9 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
         switch (classs) {
           case "action":
             editLineType("character");
+            if (fore == "character" || fore == "parentherical") {
+              editLineType("dialog");
+            } 
             break;
           case "dialog":
             if (fore == "character") { 
@@ -286,7 +292,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
           </div>
           <div className='script-status'>
             <p id="script-saved">script saved</p>
-            <button id="export-pdf" className='hover-pointer' onClick={() => exportButton()}>Exportar</button>
+            <button id="export-pdf" className='hover-pointer' onClick={() => exportButton(change)}>Exportar</button>
           </div>
         </div>
         <div onKeyDown={KeyUP} onInput={updateDocument} contentEditable="true" datatype='script' className='script-editor se-min-desktop' ref={editorRef}>
@@ -314,12 +320,17 @@ TODO
 
 Slugline, transição, headers ficam sempre em maisculo
 
+Corrigir;
+- quando dá enter e troca a formatação da linha, ele troca a da última
+
 ENTER:
 - slugline: ação
 - transição e subheaders: slugline
 - personagem e parentherical: dialogo
 - dialogo: ação
 
+Google:
+- quando abrir o projeto, change tem que ser atualizado imediatamente
 
 */}
 

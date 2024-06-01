@@ -45,6 +45,10 @@
     margin-bottom: 1.13em;
 }
 
+.slugline, .transition, .subheaders{
+    text-transform: uppercase;
+}
+
 .slugline{
     margin-left: auto;
     margin-right: auto;
@@ -333,6 +337,7 @@
 
     .dialog {
         margin: 0;
+        margin-bottom: 1.13em;
         margin-left: 53.266px;
         width: 19.2em;
     }

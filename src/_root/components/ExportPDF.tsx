@@ -45,30 +45,35 @@ const styles = StyleSheet.create({
     slugline1: {
         fontWeight: 700,
         paddingBottom: 8,
+        paddingTop: 8,
         paddingLeft: 80.4,
     },
     slugline2: {
         fontWeight: 700,
         paddingBottom: 8,
+        paddingTop: 8,
         paddingLeft: 73.2,
     },
     slugline3: {
         fontWeight: 700,
         paddingBottom: 8,
+        paddingTop: 8,
         paddingLeft: 66,
     },
     slugline4: {
         fontWeight: 700,
         paddingBottom: 8,
+        paddingTop: 8,
         paddingLeft: 58.8,
     },
     slugline5: {
         fontWeight: 700,
         paddingBottom: 8,
+        paddingTop: 8,
         paddingLeft: 51.6,
     },
     action: {
-        // paddingBottom: 8,
+        paddingBottom: 8,
         paddingLeft: 102,
     },
     character: {
@@ -78,9 +83,9 @@ const styles = StyleSheet.create({
         paddingLeft: 202.6,
     },
     dialog: {
-        paddingBottom: 8,
         width: 420,
         paddingLeft: 166.7,
+        paddingBottom: 8,
     },
     transition: {
         textAlign: "right",
@@ -115,9 +120,12 @@ function ShowNHide(){
     ele?.classList.toggle("export-overlay-hide")
     ele?.classList.toggle("export-overlay-show")
 }
-
+let text = ""
 const ExportPDF = forwardRef((props: { text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactPortal | Iterable<React.ReactNode> | null | undefined; info: InfoProps; },ref) => {
-    let text = props.text?.toString()
+    
+    if (props.text?.toString() && text == ""){
+        text = props.text?.toString()
+    }
 
     const [download, setDownload] = useState(0)
     useEffect(() => {
@@ -131,13 +139,15 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
         }
     }, [])
 
-    const updatePDF = () => {
+    const updatePDF = (script: any = text) => {
+        // console.log(script)
+        text = script
+        // console.log(text)
         setDownload(download + 1)
-        console.log("kaka")
     }
 
     useImperativeHandle(ref, () => ({
-        updatePDF: () => { updatePDF() }
+        updatePDF: (script: any = text) => { updatePDF(script) }
     }))
 
     return (
