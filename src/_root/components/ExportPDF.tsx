@@ -163,7 +163,7 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
                     <label className='no-select hover-pointer' htmlFor="export-date">Data na capa</label>
                     <div id="buttons">
                         <button className='hover-pointer' onClick={() => {ShowNHide()}}>Cancel</button>
-                        <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName='rotero' id="export-blabla">
+                        <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName={getInputV("export-title")} id="export-blabla">
                             {({ loading }) => (loading ? (
                                 <button id="export-button" className='no-export'>Loading</button>
                             ) : (
