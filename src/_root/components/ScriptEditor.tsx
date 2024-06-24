@@ -329,7 +329,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
     <>
       <div className='script-editor-container'>
         <div id="slugCount"></div>
-        <div className='script-context-menu phone-not-writing'>{/* phone-is-writing */}
+        <div className='script-context-menu phone-not-writing'>{/* phone-not-writing || phone-is-writing */}
           <div className='editor-type'>
             {isPhone ?
               <img onClick={() => { openMenu(); updateSLuglineVisualCount() }} style={{ transform: "scale(.75)", width: "2em", marginLeft: "14px" }} className="editor-button" src="editor-buttons/bars.svg" />
@@ -388,6 +388,8 @@ Google:
 - quando abrir o projeto, change tem que ser atualizado imediatamente
 
 Info também ser atualizada quando o projeto for exportado
+
+confirmação de deletar o roteiro
 
 */}
 

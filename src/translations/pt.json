@@ -13,6 +13,15 @@
                 "account": "Conta Google",
                 "continue": "Continuar sem entrar",
                 "not-save": "seu roteiro não será salvo"
+            },
+            "menu":{
+                "settings":{
+                    "title": "Configurações",
+                    "author-name": "Nome do Autor",
+                    "language": "Língua",
+                    "save-settings": "Salvar"
+                },
+                "script-title-label": "Roteiros"
             }
         }
     }

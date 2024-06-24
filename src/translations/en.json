@@ -13,6 +13,15 @@
                 "account": "Google Account",
                 "continue": "Continue without enter",
                 "not-save": "your script won't be saved"
+            },
+            "menu":{
+                "settings":{
+                    "title": "Settings",
+                    "author-name": "Author Name",
+                    "language": "Language",
+                    "save-settings": "Save Settings"
+                },
+                "script-title-label": "Scripts"
             }
         }
     }

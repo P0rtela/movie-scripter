@@ -31,7 +31,7 @@ function RootLayout() {
     const ele = document.getElementById("export-overlay")
     ele?.classList.toggle("export-overlay-hide")
     ele?.classList.toggle("export-overlay-show")
-    console.log(script)
+    // console.log(script)
     exportRef.current?.updatePDF(script)
   }
 

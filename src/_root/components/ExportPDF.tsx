@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'rea
 import { Page, Text, View, Document, StyleSheet, Font, PDFViewer } from '@react-pdf/renderer'
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
-import fontRegular from "./fonts/CourierPrime-Regular.ttf" 
+import fontRegular from "./fonts/CourierPrime-Regular.ttf"
 import fontBold from "./fonts/CourierPrime-Bold.ttf"
 import './export-container.css'
 
@@ -104,9 +104,11 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: 700,
         textAlign: "center",
+        paddingBottom: 24,
     },
     covertext: {
         textAlign: "center",
+        paddingBottom: 16,
     }
 });
 
@@ -116,15 +118,15 @@ interface InfoProps {
     date: boolean;
 }
 
-function ShowNHide(){
+function ShowNHide() {
     const ele = document.getElementById("export-overlay")
     ele?.classList.toggle("export-overlay-hide")
     ele?.classList.toggle("export-overlay-show")
 }
 let text = ""
-const ExportPDF = forwardRef((props: { text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactPortal | Iterable<React.ReactNode> | null | undefined; info: InfoProps; },ref) => {
-    
-    if (props.text?.toString() && text == ""){
+const ExportPDF = forwardRef((props: { text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactPortal | Iterable<React.ReactNode> | null | undefined; info: InfoProps; }, ref) => {
+
+    if (props.text?.toString() && text == "") {
         text = props.text?.toString()
     }
 
@@ -145,6 +147,22 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
         text = script
         // console.log(text)
         setDownload(download + 1)
+        let authorInput = document.getElementById("export-author") as HTMLInputElement | null
+        let titleInput = document.getElementById("export-title") as HTMLInputElement | null
+
+        if (!authorInput || !titleInput){return}
+
+        if (localStorage.getItem("authorName") !== null){
+            authorInput.value = localStorage.getItem("authorName") as string
+        } else { localStorage.setItem("authorName","Uknown Author") }
+
+        if (localStorage.getItem("currentScriptName") !== null){
+            titleInput.value = localStorage.getItem("currentScriptName") as string
+        } else { localStorage.setItem("currentScriptName","Script Ipsum") }
+
+        if(localStorage.getItem("authorName") != authorInput.value || localStorage.getItem("currentScriptName") != titleInput.value){
+            updatePDF()
+        }
     }
 
     useImperativeHandle(ref, () => ({
@@ -163,7 +181,7 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
                     <label className='no-select hover-pointer' htmlFor="export-date">Data na capa</label>
                     <div id="buttons">
                         <button className='hover-pointer' onClick={() => {ShowNHide()}}>Cancel</button>
-                        <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName={getInputV("export-title")} id="export-blabla">
+                        <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName='rotero' id="export-blabla">
                             {({ loading }) => (loading ? (
                                 <button id="export-button" className='no-export'>Loading</button>
                             ) : (
@@ -206,6 +224,7 @@ const MakePDF = (props: { text: string | number | boolean | React.ReactElement<a
             <Page size="A4" style={styles.cover}>
                 <View>
                     <Text style={styles.title}>{props.info.title}</Text>
+                    <Text style={styles.covertext}>written by</Text>
                     <Text style={styles.covertext}>{props.info.author}</Text>
                     <Text style={styles.covertext}>{props.info.date ? new Date().toLocaleDateString() : ""}</Text>
                 </View>
