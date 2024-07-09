@@ -8,7 +8,7 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
   const [isPhone, setIsPhone] = useState(false);
 
   useEffect(() => {
-    setIsPhone(navigator.maxTouchPoints > 0);
+    setIsPhone(window.innerWidth < 1400);
     updateResizeView()
     openMenu()
   }, []);

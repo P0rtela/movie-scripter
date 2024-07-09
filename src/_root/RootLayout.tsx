@@ -5,7 +5,7 @@ import ExportPDF from "./components/ExportPDF";
 import './components/components.css'
 let IsMenuOpen = false
 function MenuOpen() {
-  if (navigator.maxTouchPoints == 0) { return }
+  if (window.innerWidth >= 1200) { return }
   IsMenuOpen = (!IsMenuOpen)
   if (IsMenuOpen) {
     document.getElementById('main')?.classList.remove('closedMenu')

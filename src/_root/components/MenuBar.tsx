@@ -12,7 +12,7 @@ function MenuBar({ openMenu }: { openMenu: () => void }) {
     <>
       <div id='menu-bar' className="menu-bar closed-settings">
         <div id="user-bar">
-          <p id="project-name"> <img id='project-logo' src="icons/movie-scripter-logo-white.svg" /> <span>Movie Scripter</span> {navigator.maxTouchPoints > 0 ? <img id="close-bar" onClick={() => openMenu()} className="editor-button" src="editor-buttons/xmark.svg" /> : <img id="close-bar" onClick={() => openMenu()} style={{ cursor: 'default', opacity: '0' }} className="editor-button" src="editor-buttons/xmark.svg" />}</p>
+          <p id="project-name"> <img id='project-logo' src="icons/movie-scripter-logo-white.svg" /> <span>Movie Scripter</span> {window.innerWidth < 1200 ? <img id="close-bar" onClick={() => openMenu()} className="editor-button" src="editor-buttons/xmark.svg" /> : <img id="close-bar" onClick={() => openMenu()} style={{ cursor: 'default', opacity: '0' }} className="editor-button" src="editor-buttons/xmark.svg" />}</p>
           <p id="user-name">Lucas Portela Lobo Pessoa de Mendonça</p>
         </div>
         <p id="script-gap">{t('menu.script-title-label')}</p>

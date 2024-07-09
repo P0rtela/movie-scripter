@@ -142,7 +142,7 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
         }
     }, [])
 
-    const updatePDF = (script: any = text) => {
+    const updatePDF = (script: any = text, addInput = false) => {
         // console.log(script)
         text = script
         // console.log(text)
@@ -151,17 +151,18 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
         let titleInput = document.getElementById("export-title") as HTMLInputElement | null
 
         if (!authorInput || !titleInput){return}
-
-        if (localStorage.getItem("authorName") !== null){
-            authorInput.value = localStorage.getItem("authorName") as string
-        } else { localStorage.setItem("authorName","Uknown Author") }
-
-        if (localStorage.getItem("currentScriptName") !== null){
-            titleInput.value = localStorage.getItem("currentScriptName") as string
-        } else { localStorage.setItem("currentScriptName","Script Ipsum") }
-
-        if(localStorage.getItem("authorName") != authorInput.value || localStorage.getItem("currentScriptName") != titleInput.value){
+        //localStorage.getItem("currentScriptName")
+        //localStorage.getItem("authorName")
+        if (addInput){
+            localStorage.setItem("authorName", authorInput.value)
+            localStorage.setItem("currentScriptName", titleInput.value)
+            console.log("Atualizou storage")
             updatePDF()
+        } else {
+            authorInput.value = localStorage.getItem("authorName") as string
+            titleInput.value = localStorage.getItem("currentScriptName") as string
+
+            console.log("Atualizou input")
         }
     }
 
@@ -174,14 +175,14 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
             <div id="export-overlay" className="export-overlay-hide">
                 <div id="export-container">
                     <label className='no-select' htmlFor="export-title">Título</label>
-                    <input type="text" id="export-title" name="export-title" onChange={() => { updatePDF() }} />
+                    <input type="text" id="export-title" name="export-title" onChange={() => { updatePDF(text,true) }} />
                     <label className='no-select' htmlFor="export-author">Autor</label>
-                    <input type="text" id="export-author" name="export-author" onChange={() => { updatePDF() }} />
-                    <input type="checkbox" id="export-date" name="export-date" onChange={() => { updatePDF() }} />
+                    <input type="text" id="export-author" name="export-author" onChange={() => { updatePDF(text,true) }} />
+                    <input type="checkbox" id="export-date" name="export-date" onChange={() => { updatePDF(text,true) }} />
                     <label className='no-select hover-pointer' htmlFor="export-date">Data na capa</label>
                     <div id="buttons">
                         <button className='hover-pointer' onClick={() => {ShowNHide()}}>Cancel</button>
-                        <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName='rotero' id="export-blabla">
+                        <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName={getInputV("export-title")} id="export-blabla">
                             {({ loading }) => (loading ? (
                                 <button id="export-button" className='no-export'>Loading</button>
                             ) : (
