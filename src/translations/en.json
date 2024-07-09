@@ -22,6 +22,25 @@
                     "save-settings": "Save Settings"
                 },
                 "script-title-label": "Scripts"
+            },
+            "editor":{
+                "slugline": "Slugline",
+                "action": "Action",
+                "character": "Character",
+                "dialog": "Dialog",
+                "parentherical": "Parentherical",
+                "transition": "Transition",
+                "subheaders": "Subheaders",
+                "script-saved": "script saved",
+                "export": "Export"
+            },
+            "export":{
+                "title": "Title",
+                "author": "Author",
+                "date-cover": "Date on the Cover",
+                "cancel": "Cancel",
+                "loading": "loading...",
+                "download": "Download"
             }
         }
     }

@@ -5,6 +5,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import fontRegular from "./fonts/CourierPrime-Regular.ttf"
 import fontBold from "./fonts/CourierPrime-Bold.ttf"
 import './export-container.css'
+import { useTranslation } from 'react-i18next';
 
 Font.registerHyphenationCallback((word) => {
     // Return entire word as unique part
@@ -126,6 +127,7 @@ function ShowNHide() {
 let text = ""
 const ExportPDF = forwardRef((props: { text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactPortal | Iterable<React.ReactNode> | null | undefined; info: InfoProps; }, ref) => {
 
+    const { t } = useTranslation();
     if (props.text?.toString() && text == "") {
         text = props.text?.toString()
     }
@@ -174,19 +176,19 @@ const ExportPDF = forwardRef((props: { text: string | number | boolean | React.R
         <>
             <div id="export-overlay" className="export-overlay-hide">
                 <div id="export-container">
-                    <label className='no-select' htmlFor="export-title">Título</label>
+                    <label className='no-select' htmlFor="export-title">{t("export.title")}</label>
                     <input type="text" id="export-title" name="export-title" onChange={() => { updatePDF(text,true) }} />
-                    <label className='no-select' htmlFor="export-author">Autor</label>
+                    <label className='no-select' htmlFor="export-author">{t("export.author")}</label>
                     <input type="text" id="export-author" name="export-author" onChange={() => { updatePDF(text,true) }} />
                     <input type="checkbox" id="export-date" name="export-date" onChange={() => { updatePDF(text,true) }} />
-                    <label className='no-select hover-pointer' htmlFor="export-date">Data na capa</label>
+                    <label className='no-select hover-pointer' htmlFor="export-date">{t("export.date-cover")}</label>
                     <div id="buttons">
-                        <button className='hover-pointer' onClick={() => {ShowNHide()}}>Cancel</button>
+                        <button className='hover-pointer' onClick={() => {ShowNHide()}}>{t("export.cancel")}</button>
                         <PDFDownloadLink document={<MakePDF info={{ title: getInputV("export-title"), author: getInputV("export-author"), date: checkDate() }} text={text} />} fileName={getInputV("export-title")} id="export-blabla">
                             {({ loading }) => (loading ? (
-                                <button id="export-button" className='no-export'>Loading</button>
+                                <button id="export-button" className='no-export'>{t("export.loading")}</button>
                             ) : (
-                                <button id="export-button" className='hover-pointer'>Download</button>
+                                <button id="export-button" className='hover-pointer'>{t("export.download")}</button>
                             ))}
                         </PDFDownloadLink>
                     </div>

@@ -1,9 +1,9 @@
 import './MenuBar.css'
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 function MenuBar({ openMenu }: { openMenu: () => void }) {
   const { t } = useTranslation();
-  function toogleSettingsMenu(){
+  function toogleSettingsMenu() {
     document.getElementById("menu-bar")?.classList.toggle("open-settings")
     document.getElementById("menu-bar")?.classList.toggle("closed-settings")
   }
@@ -30,9 +30,10 @@ function MenuBar({ openMenu }: { openMenu: () => void }) {
             <img className="script-delete" onClick={() => openMenu()} src="editor-buttons/trash-can.svg" />
           </div>
           <div className='script-item hover-pointer'>
-            <p className='script-name'>Dama Fatal Dama Fatal Dama Fatal Dama Fatal</p>
+            <p className='script-name'>A Fuga</p>
             <img className="script-delete" onClick={() => openMenu()} src="editor-buttons/trash-can.svg" />
           </div>
+          <div className='new-script hover-pointer'>New<span>+</span></div>
         </div>
         <footer>
           <div id="settings-top" className='hover-pointer n-text-select' onClick={toogleSettingsMenu}>
@@ -41,9 +42,9 @@ function MenuBar({ openMenu }: { openMenu: () => void }) {
           </div>
           <div id="settings-content">
             <label htmlFor="authorNameChangeInput">{t('menu.settings.author-name')}:</label>
-            <input onChange={(e)=>{localStorage.setItem("authorName",e.target.value)}} name='authorNameChangeInput' id="authorNameChangeInput" type="text" defaultValue={localStorage.getItem("authorName") as string} />
+            <input onChange={(e) => { localStorage.setItem("authorName", e.target.value) }} name='authorNameChangeInput' id="authorNameChangeInput" type="text" defaultValue={localStorage.getItem("authorName") as string} />
             <label>{t('menu.settings.language')}</label>
-            <select onChange={(e)=>{localStorage.setItem("language",e.target.value); location.reload()}} defaultValue={localStorage.getItem("language") as string}>
+            <select onChange={(e) => { localStorage.setItem("language", e.target.value); location.reload() }} defaultValue={localStorage.getItem("language") as string}>
               <option value="en">English</option>
               <option value="pt">Português</option>
             </select>

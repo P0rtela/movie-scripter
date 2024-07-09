@@ -1,7 +1,10 @@
-import { FormEvent, createElement, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next';
 
 // { openMenu }: { openMenu: () => void }, { exportButton }: { exportButton: () => void }
 function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, exportButton: (script: string) => void }) {
+  
+  const { t } = useTranslation();
   const editorRef = useRef<HTMLDivElement>(null);
   const scriptChangeRef = useRef(null);
   let change = "";
@@ -354,8 +357,8 @@ function ScriptEditor({ openMenu, exportButton }: { openMenu: () => void, export
             </div>
           </div>
           <div className='script-status'>
-            <p id="script-saved">script saved</p>
-            <button id="export-pdf" className='hover-pointer' onClick={() => exportButton(change)}>Exportar</button>
+            <p id="script-saved">{t('editor.script-saved')}</p>
+            <button id="export-pdf" className='hover-pointer' onClick={() => exportButton(change)}>{t('editor.export')}</button>
           </div>
         </div>
         <div onKeyDown={KeyUP} onInput={updateDocument} contentEditable="true" datatype='script' className='script-editor se-min-desktop' ref={editorRef}>

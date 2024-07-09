@@ -22,6 +22,25 @@
                     "save-settings": "Salvar"
                 },
                 "script-title-label": "Roteiros"
+            },
+            "editor":{
+                "slugline": "Cabeçalho",
+                "action": "Ação",
+                "character": "Personagem",
+                "dialog": "Diálogo",
+                "parentherical": "Parênteses",
+                "transition": "Transição",
+                "subheaders": "Sublinha",
+                "script-saved": "roteiro salvo",
+                "export": "Exportar"
+            },
+            "export":{
+                "title": "Título",
+                "author": "Autor",
+                "date-cover": "Data na Capa",
+                "cancel": "Cancelar",
+                "loading": "carregando...",
+                "download": "Baixar"
             }
         }
     }
