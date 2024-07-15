@@ -1,3 +1,4 @@
+import AuthLayout from '../../_auth/AuthLayout';
 import './MenuBar.css'
 import { useTranslation } from "react-i18next";
 
@@ -15,6 +16,7 @@ function MenuBar({ openMenu }: { openMenu: () => void }) {
           <p id="project-name"> <img id='project-logo' src="icons/movie-scripter-logo-white.svg" /> <span>Movie Scripter</span> {window.innerWidth < 1200 ? <img id="close-bar" onClick={() => openMenu()} className="editor-button" src="editor-buttons/xmark.svg" /> : <img id="close-bar" onClick={() => openMenu()} style={{ cursor: 'default', opacity: '0' }} className="editor-button" src="editor-buttons/xmark.svg" />}</p>
           <p id="user-name">Lucas Portela Lobo Pessoa de Mendonça</p>
         </div>
+        {(true) ? <><div></div><AuthLayout /></>: <>
         <p id="script-gap">{t('menu.script-title-label')}</p>
         <div id="script-list">
           <div className='script-item hover-pointer'>
@@ -35,6 +37,8 @@ function MenuBar({ openMenu }: { openMenu: () => void }) {
           </div>
           <div className='new-script hover-pointer'>New<span>+</span></div>
         </div>
+        </>}
+        
         <footer>
           <div id="settings-top" className='hover-pointer n-text-select' onClick={toogleSettingsMenu}>
             <p>{t('menu.settings.title')}</p>

@@ -16,9 +16,6 @@ const App = () => {
     return (
         <main>
             <Routes>
-                {/* public routes */}
-                <Route path="/sign" element={<AuthLayout />}  />
-                {/* private routes */}
                 <Route index element={<RootLayout />} />
                 <Route path='/*' element={<NotFound />} />
             </Routes>

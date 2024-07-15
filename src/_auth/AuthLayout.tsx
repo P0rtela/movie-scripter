@@ -2,12 +2,12 @@ import { Navigate } from "react-router-dom"
 import { useEffect } from 'react';
 import './auth.css'
 import {useTranslation} from "react-i18next";
+import GoogleComponent from "../google/GoogleLegacy";
 
 const AuthLayout = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = 'logar';
   }, []);
 
   const isAuthenticated = false;
@@ -24,11 +24,9 @@ const AuthLayout = () => {
                     <img id="google-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png"></img>
                     <p className="text-600">{t('sign.enter')}<br/>{t('sign.account')}</p>
                   </div>
-                  <hr />
-                  <div><a id="no-account" className="text-500 opacity-100 hover-pointer">{t('sign.continue')}</a> <a className="text-300" style={{fontSize: '.85em',color: 'var(--accent40)'}}>({t('sign.not-save')})</a></div>
+                  <div><p id="no-account" className="text-500 opacity-100 hover-pointer">{t('sign.continue')}</p></div>
                </div>
               </section>
-              <img id="sign-side-image" className="w-100 h-screen" src="images/sign-side-image.png" />
             </div>
           </>
         )}

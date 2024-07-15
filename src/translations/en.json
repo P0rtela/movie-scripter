@@ -11,8 +11,7 @@
             "sign":{
                 "enter": "Enter with your",
                 "account": "Google Account",
-                "continue": "Continue without enter",
-                "not-save": "your script won't be saved"
+                "continue": "You can continue without enter, but your script won't be saved"
             },
             "menu":{
                 "settings":{

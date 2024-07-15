@@ -11,8 +11,7 @@
             "sign":{
                 "enter": "Entre com a sua",
                 "account": "Conta Google",
-                "continue": "Continuar sem entrar",
-                "not-save": "seu roteiro não será salvo"
+                "continue": "Você pode continuar sem entrar, mas seu roteiro não será salvo"
             },
             "menu":{
                 "settings":{
